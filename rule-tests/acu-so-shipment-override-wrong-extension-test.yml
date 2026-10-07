@@ -1,0 +1,38 @@
+id: acu-so-shipment-override-wrong-extension
+valid:
+  - |
+    public class HCConfirmShipmentExt : PXGraphExtension<ConfirmShipmentExtension, SOShipmentEntry>
+    {
+        public static bool IsActive() => true;
+        [PXOverride]
+        public virtual void ConfirmShipment(ConfirmShipmentArgs args, Action<ConfirmShipmentArgs> baseMethod)
+        {
+            baseMethod(args);
+        }
+    }
+  - |
+    public class HCSOShipmentEntryExt : PXGraphExtension<SOShipmentEntry>
+    {
+        public static bool IsActive() => true;
+        [PXOverride]
+        public void Persist(Action baseMethod) { baseMethod(); }
+        public virtual void CreateShipment(SOOrder order) { }
+    }
+invalid:
+  - |
+    public class HCSOShipmentEntryExt : PXGraphExtension<SOShipmentEntry>
+    {
+        public static bool IsActive() => true;
+        [PXOverride]
+        public virtual void ConfirmShipment(ConfirmShipmentArgs args, Action<ConfirmShipmentArgs> baseMethod)
+        {
+            baseMethod(args);
+        }
+    }
+  - |
+    public class HCSOShipmentEntryExt : PXGraphExtension<PX.Objects.SO.SOShipmentEntry>
+    {
+        public static bool IsActive() => true;
+        [PXOverride]
+        public virtual void CreateShipment(CreateShipmentArgs args, Action<CreateShipmentArgs> baseMethod) => baseMethod(args);
+    }

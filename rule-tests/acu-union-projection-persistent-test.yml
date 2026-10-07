@@ -1,0 +1,18 @@
+id: acu-union-projection-persistent
+valid:
+  - |
+    [PXProjection(typeof(MappedSelect<HCODDocument, From<BqlTableMapper<ARInvoice, HCODARMapper>, Union<BqlTableMapper<APInvoice, HCODAPMapper>>>>))]
+    public class HCODDocument : PXBqlTable, IBqlTable { }
+  - |
+    [PXProjection(typeof(Select<SOOrder>), Persistent = true)]
+    public class HCODOrderProjection : PXBqlTable, IBqlTable { }
+  - |
+    [PXProjection(typeof(Select<SOOrder>), new Type[] { typeof(SOOrder) })]
+    public class HCODOrderProjection : PXBqlTable, IBqlTable { }
+invalid:
+  - |
+    [PXProjection(typeof(MappedSelect<HCODDocument, From<BqlTableMapper<ARInvoice, HCODARMapper>, Union<BqlTableMapper<APInvoice, HCODAPMapper>>>>), Persistent = true)]
+    public class HCODDocument : PXBqlTable, IBqlTable { }
+  - |
+    [PXProjection(typeof(MappedSelect<HCODDocument, From<BqlTableMapper<ARInvoice, HCODARMapper>>>), new Type[] { typeof(ARInvoice) })]
+    public class HCODDocument : PXBqlTable, IBqlTable { }

@@ -24,6 +24,29 @@ snapshots:
       start: 54
       end: 87
   ? |
+    class C { void M() { throw new PXSetPropertyException<SOOrder.customerRefNbr>("Customer reference is required."); } }
+  : labels:
+    - source: new PXSetPropertyException<SOOrder.customerRefNbr>("Customer reference is required.")
+      style: primary
+      start: 27
+      end: 112
+    - source: PXSetPropertyException<SOOrder.customerRefNbr>
+      style: secondary
+      start: 31
+      end: 77
+    - source: '"Customer reference is required."'
+      style: secondary
+      start: 78
+      end: 111
+    - source: '"Customer reference is required."'
+      style: secondary
+      start: 78
+      end: 111
+    - source: '"Customer reference is required."'
+      style: secondary
+      start: 78
+      end: 111
+  ? |
     class C { void M(string n) { throw new PXException($"Order {n} is closed."); } }
   : labels:
     - source: new PXException($"Order {n} is closed.")

@@ -1,0 +1,20 @@
+id: acu-ar-releasedocproc-three-arg
+language: csharp
+severity: error
+message: "Override of the 3-argument AR ReleaseDocProc. ARDocumentRelease calls the 4-argument overload, so this override never runs during release; override ReleaseDocProc(JournalEntry, ARRegister, List<Batch>, ARMassProcessReleaseTransactionScopeDelegate)."
+metadata:
+  since: "2025R2"
+  skill: acumatica-release-process-hooks
+rule:
+  # Reported on the declared name so that only edits to the declaration line raise it.
+  any:
+    - kind: identifier
+    - kind: qualified_name
+  inside:
+    field: name
+    kind: method_declaration
+    all:
+      - has: { field: name, regex: '^ReleaseDocProc$' }
+      - has: { kind: attribute_list, regex: 'PXOverride' }
+      - has: { field: parameters, regex: '\bARRegister\b' }
+      - not: { has: { field: parameters, regex: 'ARMassProcessReleaseTransactionScopeDelegate' } }

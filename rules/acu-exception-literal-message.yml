@@ -7,7 +7,7 @@ metadata:
 rule:
   kind: object_creation_expression
   all:
-    - has: { field: type, regex: '^PX\w*Exception$' }
+    - has: { field: type, regex: '^PX\w*Exception(<.*>)?$' }
     - has:
         field: arguments
         has:

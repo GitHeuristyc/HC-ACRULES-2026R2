@@ -1,0 +1,76 @@
+id: acu-po-override-removed-hook
+snapshots:
+  ? |
+    public class HCPOOrderEntryExt : PXGraphExtension<POOrderEntry>
+    {
+        public static bool IsActive() => true;
+        [PXOverride]
+        public virtual POLine FillPOLineFromDemand(POLine dest, POFixedDemand demand, string OrderType, SOLineSplit3 soline, FillDelegate baseMethod)
+            => baseMethod(dest, demand, OrderType, soline);
+    }
+  : labels:
+    - source: FillPOLineFromDemand
+      style: primary
+      start: 152
+      end: 172
+    - source: '[PXOverride]'
+      style: secondary
+      start: 113
+      end: 125
+    - source: FillPOLineFromDemand
+      style: secondary
+      start: 152
+      end: 172
+    - source: |-
+        [PXOverride]
+            public virtual POLine FillPOLineFromDemand(POLine dest, POFixedDemand demand, string OrderType, SOLineSplit3 soline, FillDelegate baseMethod)
+                => baseMethod(dest, demand, OrderType, soline);
+      style: secondary
+      start: 113
+      end: 327
+  ? |
+    public class HCPOReceiptEntryExt : PXGraphExtension<POReceiptEntry>
+    {
+        public static bool IsActive() => true;
+        [PXOverride]
+        public virtual void ReleaseReceipt(INReceiptEntry docgraph, AP.APInvoiceEntry invoiceGraph, POReceipt aDoc, DocumentList<INRegister> aINCreated,
+            DocumentList<APInvoice> aAPCreated, bool aIsMassProcess, ReleaseReceiptDelegate baseMethod)
+        {
+            baseMethod(docgraph, invoiceGraph, aDoc, aINCreated, aAPCreated, aIsMassProcess);
+        }
+    }
+  : labels:
+    - source: ReleaseReceipt
+      style: primary
+      start: 154
+      end: 168
+    - source: '[PXOverride]'
+      style: secondary
+      start: 117
+      end: 129
+    - source: ReleaseReceipt
+      style: secondary
+      start: 154
+      end: 168
+    - source: INReceiptEntry
+      style: secondary
+      start: 169
+      end: 183
+    - source: INReceiptEntry docgraph
+      style: secondary
+      start: 169
+      end: 192
+    - source: INReceiptEntry docgraph
+      style: secondary
+      start: 169
+      end: 192
+    - source: |-
+        [PXOverride]
+            public virtual void ReleaseReceipt(INReceiptEntry docgraph, AP.APInvoiceEntry invoiceGraph, POReceipt aDoc, DocumentList<INRegister> aINCreated,
+                DocumentList<APInvoice> aAPCreated, bool aIsMassProcess, ReleaseReceiptDelegate baseMethod)
+            {
+                baseMethod(docgraph, invoiceGraph, aDoc, aINCreated, aAPCreated, aIsMassProcess);
+            }
+      style: secondary
+      start: 117
+      end: 480

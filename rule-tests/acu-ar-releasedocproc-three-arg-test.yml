@@ -1,0 +1,41 @@
+id: acu-ar-releasedocproc-three-arg
+valid:
+  - |
+    public class HCARReleaseProcessExt : PXGraphExtension<ARReleaseProcess>
+    {
+        public delegate List<ARRegister> ReleaseDocProcDelegate(JournalEntry je, ARRegister ardoc, List<Batch> pmBatchList, ARDocumentRelease.ARMassProcessReleaseTransactionScopeDelegate onreleasecomplete);
+        [PXOverride]
+        public virtual List<ARRegister> ReleaseDocProc(JournalEntry je, ARRegister ardoc, List<Batch> pmBatchList,
+            ARDocumentRelease.ARMassProcessReleaseTransactionScopeDelegate onreleasecomplete, ReleaseDocProcDelegate baseMethod)
+        {
+            return baseMethod(je, ardoc, pmBatchList, onreleasecomplete);
+        }
+    }
+  - |
+    public class HCAPReleaseProcessExt : PXGraphExtension<APReleaseProcess>
+    {
+        public delegate List<APRegister> ReleaseDocProcDelegate(JournalEntry je, APRegister doc, bool isPrebooking, out List<INRegister> inDocs);
+        [PXOverride]
+        public virtual List<APRegister> ReleaseDocProc(JournalEntry je, APRegister doc, bool isPrebooking, out List<INRegister> inDocs, ReleaseDocProcDelegate baseMethod)
+        {
+            return baseMethod(je, doc, isPrebooking, out inDocs);
+        }
+    }
+invalid:
+  - |
+    public class HCARReleaseProcessExt : PXGraphExtension<ARReleaseProcess>
+    {
+        [PXOverride]
+        public virtual List<ARRegister> ReleaseDocProc(JournalEntry je, ARRegister ardoc, List<Batch> pmBatchList,
+            Func<JournalEntry, ARRegister, List<Batch>, List<ARRegister>> baseMethod)
+        {
+            return baseMethod(je, ardoc, pmBatchList);
+        }
+    }
+  - |
+    public class HCARReleaseProcessExt : PXGraphExtension<ARReleaseProcess>
+    {
+        public delegate List<ARRegister> ReleaseDocProcDel(JournalEntry je, ARRegister doc, List<Batch> pmBatchList);
+        [PXOverride]
+        public List<ARRegister> ReleaseDocProc(JournalEntry je, ARRegister doc, List<Batch> pmBatchList, ReleaseDocProcDel del) => del(je, doc, pmBatchList);
+    }

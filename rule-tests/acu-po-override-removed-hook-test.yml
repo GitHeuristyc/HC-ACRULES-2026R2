@@ -1,0 +1,41 @@
+id: acu-po-override-removed-hook
+valid:
+  - |
+    public class HCPOReceiptEntryExt : PXGraphExtension<POReceiptEntry>
+    {
+        public static bool IsActive() => true;
+        public delegate void ReleaseReceiptDelegate(POReceipt aDoc, DocumentList<INRegister> aINCreated, DocumentList<APInvoice> aAPCreated, bool aIsMassProcess);
+        [PXOverride]
+        public virtual void ReleaseReceipt(POReceipt aDoc, DocumentList<INRegister> aINCreated, DocumentList<APInvoice> aAPCreated, bool aIsMassProcess, ReleaseReceiptDelegate baseMethod)
+        {
+            baseMethod(aDoc, aINCreated, aAPCreated, aIsMassProcess);
+        }
+    }
+  - |
+    public class HCCreatePOOrdersExt : PXGraphExtension<CreatePOOrdersFromDemandsExtension, POOrderEntry>
+    {
+        public static bool IsActive() => true;
+        [PXOverride]
+        public virtual POLine FillNewPOLineFromDemand(POLine dest, POFixedDemand demand, SOLineSplit soline, Func<POLine, POFixedDemand, SOLineSplit, POLine> baseMethod)
+            => baseMethod(dest, demand, soline);
+    }
+invalid:
+  - |
+    public class HCPOOrderEntryExt : PXGraphExtension<POOrderEntry>
+    {
+        public static bool IsActive() => true;
+        [PXOverride]
+        public virtual POLine FillPOLineFromDemand(POLine dest, POFixedDemand demand, string OrderType, SOLineSplit3 soline, FillDelegate baseMethod)
+            => baseMethod(dest, demand, OrderType, soline);
+    }
+  - |
+    public class HCPOReceiptEntryExt : PXGraphExtension<POReceiptEntry>
+    {
+        public static bool IsActive() => true;
+        [PXOverride]
+        public virtual void ReleaseReceipt(INReceiptEntry docgraph, AP.APInvoiceEntry invoiceGraph, POReceipt aDoc, DocumentList<INRegister> aINCreated,
+            DocumentList<APInvoice> aAPCreated, bool aIsMassProcess, ReleaseReceiptDelegate baseMethod)
+        {
+            baseMethod(docgraph, invoiceGraph, aDoc, aINCreated, aAPCreated, aIsMassProcess);
+        }
+    }

@@ -1,0 +1,22 @@
+id: acu-so-shipment-override-wrong-extension
+language: csharp
+severity: error
+message: "CreateShipment or ConfirmShipment overridden on PXGraphExtension<SOShipmentEntry>. These methods live in CreateShipmentExtension and ConfirmShipmentExtension, so the graph fails with OriginalMethodNotBeenFound; extend PXGraphExtension<ConfirmShipmentExtension, SOShipmentEntry> (or CreateShipmentExtension)."
+metadata:
+  since: "2025R2"
+  skill: acumatica-order-to-cash-hooks
+rule:
+  # Reported on the declared name so that only edits to the declaration line raise it.
+  any:
+    - kind: identifier
+    - kind: qualified_name
+  inside:
+    field: name
+    kind: method_declaration
+    all:
+      - has: { kind: attribute_list, regex: 'PXOverride' }
+      - has: { field: name, regex: '^(CreateShipment|ConfirmShipment)$' }
+    inside:
+      stopBy: end
+      kind: class_declaration
+      has: { kind: base_list, regex: 'PXGraphExtension<\s*([\w.]*\.)?SOShipmentEntry\s*>' }

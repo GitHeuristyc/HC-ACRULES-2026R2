@@ -1,0 +1,58 @@
+id: acu-union-projection-persistent
+snapshots:
+  ? |
+    [PXProjection(typeof(MappedSelect<HCODDocument, From<BqlTableMapper<ARInvoice, HCODARMapper>, Union<BqlTableMapper<APInvoice, HCODAPMapper>>>>), Persistent = true)]
+    public class HCODDocument : PXBqlTable, IBqlTable { }
+  : labels:
+    - source: PXProjection(typeof(MappedSelect<HCODDocument, From<BqlTableMapper<ARInvoice, HCODARMapper>, Union<BqlTableMapper<APInvoice, HCODAPMapper>>>>), Persistent = true)
+      style: primary
+      start: 1
+      end: 163
+    - source: typeof(MappedSelect<HCODDocument, From<BqlTableMapper<ARInvoice, HCODARMapper>, Union<BqlTableMapper<APInvoice, HCODAPMapper>>>>)
+      style: secondary
+      start: 14
+      end: 143
+    - source: (typeof(MappedSelect<HCODDocument, From<BqlTableMapper<ARInvoice, HCODARMapper>, Union<BqlTableMapper<APInvoice, HCODAPMapper>>>>), Persistent = true)
+      style: secondary
+      start: 13
+      end: 163
+    - source: Persistent = true
+      style: secondary
+      start: 145
+      end: 162
+    - source: (typeof(MappedSelect<HCODDocument, From<BqlTableMapper<ARInvoice, HCODARMapper>, Union<BqlTableMapper<APInvoice, HCODAPMapper>>>>), Persistent = true)
+      style: secondary
+      start: 13
+      end: 163
+    - source: PXProjection
+      style: secondary
+      start: 1
+      end: 13
+  ? |
+    [PXProjection(typeof(MappedSelect<HCODDocument, From<BqlTableMapper<ARInvoice, HCODARMapper>>>), new Type[] { typeof(ARInvoice) })]
+    public class HCODDocument : PXBqlTable, IBqlTable { }
+  : labels:
+    - source: PXProjection(typeof(MappedSelect<HCODDocument, From<BqlTableMapper<ARInvoice, HCODARMapper>>>), new Type[] { typeof(ARInvoice) })
+      style: primary
+      start: 1
+      end: 130
+    - source: typeof(MappedSelect<HCODDocument, From<BqlTableMapper<ARInvoice, HCODARMapper>>>)
+      style: secondary
+      start: 14
+      end: 95
+    - source: (typeof(MappedSelect<HCODDocument, From<BqlTableMapper<ARInvoice, HCODARMapper>>>), new Type[] { typeof(ARInvoice) })
+      style: secondary
+      start: 13
+      end: 130
+    - source: new Type[] { typeof(ARInvoice) }
+      style: secondary
+      start: 97
+      end: 129
+    - source: (typeof(MappedSelect<HCODDocument, From<BqlTableMapper<ARInvoice, HCODARMapper>>>), new Type[] { typeof(ARInvoice) })
+      style: secondary
+      start: 13
+      end: 130
+    - source: PXProjection
+      style: secondary
+      start: 1
+      end: 13

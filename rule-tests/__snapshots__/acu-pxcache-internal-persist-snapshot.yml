@@ -1,0 +1,47 @@
+id: acu-pxcache-internal-persist
+snapshots:
+  ? |
+    public class HCODWidgetMaint : PXGraph<HCODWidgetMaint>
+    {
+        public virtual void SaveRow(HCODWidget row)
+        {
+            PXCache cache = Caches[typeof(HCODWidget)];
+            cache.PersistInserted(row);
+            cache.Persist(row, PXDBOperation.Update);
+        }
+    }
+  : labels:
+    - source: cache.PersistInserted(row)
+      style: primary
+      start: 172
+      end: 198
+    - source: cache.PersistInserted
+      style: secondary
+      start: 172
+      end: 193
+  ? |
+    public class HCODWidgetMaint : PXGraph<HCODWidgetMaint>
+    {
+        public virtual void SaveStatus()
+        {
+            SyncStatusRecords.Cache.Persist(PXDBOperation.Update);
+            SyncStatusRecords.Cache.Persisted(false);
+        }
+    }
+  : labels:
+    - source: SyncStatusRecords.Cache.Persist(PXDBOperation.Update)
+      style: primary
+      start: 109
+      end: 162
+    - source: SyncStatusRecords.Cache.Persist
+      style: secondary
+      start: 109
+      end: 140
+    - source: PXDBOperation.Update
+      style: secondary
+      start: 141
+      end: 161
+    - source: (PXDBOperation.Update)
+      style: secondary
+      start: 140
+      end: 162

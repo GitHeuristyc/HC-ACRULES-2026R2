@@ -4,22 +4,30 @@ snapshots:
     namespace PX.Objects.AR;
     public class HCARInvoiceEntryExt { }
   : labels:
-    - source: namespace PX.Objects.AR;
+    - source: PX.Objects.AR
       style: primary
-      start: 0
-      end: 24
+      start: 10
+      end: 23
     - source: PX.Objects.AR
       style: secondary
       start: 10
       end: 23
+    - source: namespace PX.Objects.AR;
+      style: secondary
+      start: 0
+      end: 24
   ? |
     namespace PX.Objects.SO { public class HCSOOrderEntryExt { } }
   : labels:
-    - source: namespace PX.Objects.SO { public class HCSOOrderEntryExt { } }
+    - source: PX.Objects.SO
       style: primary
-      start: 0
-      end: 62
+      start: 10
+      end: 23
     - source: PX.Objects.SO
       style: secondary
       start: 10
       end: 23
+    - source: namespace PX.Objects.SO { public class HCSOOrderEntryExt { } }
+      style: secondary
+      start: 0
+      end: 62

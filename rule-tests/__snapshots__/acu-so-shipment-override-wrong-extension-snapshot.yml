@@ -1,0 +1,91 @@
+id: acu-so-shipment-override-wrong-extension
+snapshots:
+  ? |
+    public class HCSOShipmentEntryExt : PXGraphExtension<PX.Objects.SO.SOShipmentEntry>
+    {
+        public static bool IsActive() => true;
+        [PXOverride]
+        public virtual void CreateShipment(CreateShipmentArgs args, Action<CreateShipmentArgs> baseMethod) => baseMethod(args);
+    }
+  : labels:
+    - source: CreateShipment
+      style: primary
+      start: 170
+      end: 184
+    - source: '[PXOverride]'
+      style: secondary
+      start: 133
+      end: 145
+    - source: CreateShipment
+      style: secondary
+      start: 170
+      end: 184
+    - source: ': PXGraphExtension<PX.Objects.SO.SOShipmentEntry>'
+      style: secondary
+      start: 34
+      end: 83
+    - source: |-
+        public class HCSOShipmentEntryExt : PXGraphExtension<PX.Objects.SO.SOShipmentEntry>
+        {
+            public static bool IsActive() => true;
+            [PXOverride]
+            public virtual void CreateShipment(CreateShipmentArgs args, Action<CreateShipmentArgs> baseMethod) => baseMethod(args);
+        }
+      style: secondary
+      start: 0
+      end: 271
+    - source: |-
+        [PXOverride]
+            public virtual void CreateShipment(CreateShipmentArgs args, Action<CreateShipmentArgs> baseMethod) => baseMethod(args);
+      style: secondary
+      start: 133
+      end: 269
+  ? |
+    public class HCSOShipmentEntryExt : PXGraphExtension<SOShipmentEntry>
+    {
+        public static bool IsActive() => true;
+        [PXOverride]
+        public virtual void ConfirmShipment(ConfirmShipmentArgs args, Action<ConfirmShipmentArgs> baseMethod)
+        {
+            baseMethod(args);
+        }
+    }
+  : labels:
+    - source: ConfirmShipment
+      style: primary
+      start: 156
+      end: 171
+    - source: '[PXOverride]'
+      style: secondary
+      start: 119
+      end: 131
+    - source: ConfirmShipment
+      style: secondary
+      start: 156
+      end: 171
+    - source: ': PXGraphExtension<SOShipmentEntry>'
+      style: secondary
+      start: 34
+      end: 69
+    - source: |-
+        public class HCSOShipmentEntryExt : PXGraphExtension<SOShipmentEntry>
+        {
+            public static bool IsActive() => true;
+            [PXOverride]
+            public virtual void ConfirmShipment(ConfirmShipmentArgs args, Action<ConfirmShipmentArgs> baseMethod)
+            {
+                baseMethod(args);
+            }
+        }
+      style: secondary
+      start: 0
+      end: 277
+    - source: |-
+        [PXOverride]
+            public virtual void ConfirmShipment(ConfirmShipmentArgs args, Action<ConfirmShipmentArgs> baseMethod)
+            {
+                baseMethod(args);
+            }
+      style: secondary
+      start: 119
+      end: 275

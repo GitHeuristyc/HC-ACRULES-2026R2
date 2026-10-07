@@ -1,0 +1,71 @@
+id: acu-ar-releasedocproc-three-arg
+snapshots:
+  ? |
+    public class HCARReleaseProcessExt : PXGraphExtension<ARReleaseProcess>
+    {
+        [PXOverride]
+        public virtual List<ARRegister> ReleaseDocProc(JournalEntry je, ARRegister ardoc, List<Batch> pmBatchList,
+            Func<JournalEntry, ARRegister, List<Batch>, List<ARRegister>> baseMethod)
+        {
+            return baseMethod(je, ardoc, pmBatchList);
+        }
+    }
+  : labels:
+    - source: ReleaseDocProc
+      style: primary
+      start: 127
+      end: 141
+    - source: ReleaseDocProc
+      style: secondary
+      start: 127
+      end: 141
+    - source: '[PXOverride]'
+      style: secondary
+      start: 78
+      end: 90
+    - source: |-
+        (JournalEntry je, ARRegister ardoc, List<Batch> pmBatchList,
+                Func<JournalEntry, ARRegister, List<Batch>, List<ARRegister>> baseMethod)
+      style: secondary
+      start: 141
+      end: 283
+    - source: |-
+        [PXOverride]
+            public virtual List<ARRegister> ReleaseDocProc(JournalEntry je, ARRegister ardoc, List<Batch> pmBatchList,
+                Func<JournalEntry, ARRegister, List<Batch>, List<ARRegister>> baseMethod)
+            {
+                return baseMethod(je, ardoc, pmBatchList);
+            }
+      style: secondary
+      start: 78
+      end: 346
+  ? |
+    public class HCARReleaseProcessExt : PXGraphExtension<ARReleaseProcess>
+    {
+        public delegate List<ARRegister> ReleaseDocProcDel(JournalEntry je, ARRegister doc, List<Batch> pmBatchList);
+        [PXOverride]
+        public List<ARRegister> ReleaseDocProc(JournalEntry je, ARRegister doc, List<Batch> pmBatchList, ReleaseDocProcDel del) => del(je, doc, pmBatchList);
+    }
+  : labels:
+    - source: ReleaseDocProc
+      style: primary
+      start: 233
+      end: 247
+    - source: ReleaseDocProc
+      style: secondary
+      start: 233
+      end: 247
+    - source: '[PXOverride]'
+      style: secondary
+      start: 192
+      end: 204
+    - source: (JournalEntry je, ARRegister doc, List<Batch> pmBatchList, ReleaseDocProcDel del)
+      style: secondary
+      start: 247
+      end: 328
+    - source: |-
+        [PXOverride]
+            public List<ARRegister> ReleaseDocProc(JournalEntry je, ARRegister doc, List<Batch> pmBatchList, ReleaseDocProcDel del) => del(je, doc, pmBatchList);
+      style: secondary
+      start: 192
+      end: 358

@@ -1,0 +1,27 @@
+id: acu-po-override-removed-hook
+language: csharp
+severity: error
+message: "[PXOverride] targets a PO method that no longer exists (FillPOLineFromDemand, or ReleaseReceipt with INReceiptEntry/APInvoiceEntry graph parameters). Graph creation throws OriginalMethodNotBeenFound or SignatureNotCompatibleWithOriginalMethod; override FillNewPOLineFromDemand or ReleaseReceipt(POReceipt, DocumentList<INRegister>, DocumentList<APInvoice>, bool)."
+metadata:
+  since: "2025R2"
+  skill: acumatica-purchase-receipt-hooks
+rule:
+  # Reported on the declared name so that only edits to the declaration line raise it.
+  any:
+    - kind: identifier
+    - kind: qualified_name
+  inside:
+    field: name
+    kind: method_declaration
+    all:
+      - has: { kind: attribute_list, regex: 'PXOverride' }
+      - any:
+          - has: { field: name, regex: '^FillPOLineFromDemand$' }
+          - all:
+              - has: { field: name, regex: '^ReleaseReceipt$' }
+              - has:
+                  field: parameters
+                  has:
+                    kind: parameter
+                    nthChild: 1
+                    has: { field: type, regex: '^([\w.]*\.)?(INReceiptEntry|APInvoiceEntry)$' }

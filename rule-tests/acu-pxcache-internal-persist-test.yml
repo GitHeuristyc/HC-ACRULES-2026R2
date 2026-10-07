@@ -1,0 +1,41 @@
+id: acu-pxcache-internal-persist
+valid:
+  - |
+    public class HCODWidgetMaint : PXGraph<HCODWidgetMaint>
+    {
+        public virtual void SaveAll()
+        {
+            Actions.PressSave();
+            Persist();
+            Persist(typeof(HCODWidget), PXDBOperation.Update);
+        }
+    }
+  - |
+    public class HCODxSOOrderEntry : PXGraphExtension<SOOrderEntry>
+    {
+        [PXOverride]
+        public void Persist(Action base_Persist)
+        {
+            base_Persist();
+        }
+    }
+invalid:
+  - |
+    public class HCODWidgetMaint : PXGraph<HCODWidgetMaint>
+    {
+        public virtual void SaveStatus()
+        {
+            SyncStatusRecords.Cache.Persist(PXDBOperation.Update);
+            SyncStatusRecords.Cache.Persisted(false);
+        }
+    }
+  - |
+    public class HCODWidgetMaint : PXGraph<HCODWidgetMaint>
+    {
+        public virtual void SaveRow(HCODWidget row)
+        {
+            PXCache cache = Caches[typeof(HCODWidget)];
+            cache.PersistInserted(row);
+            cache.Persist(row, PXDBOperation.Update);
+        }
+    }

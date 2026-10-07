@@ -5,8 +5,14 @@ message: "Customization code in a PX.* namespace. Keep custom code under the HC 
 metadata:
   skill: acumatica-namespaces
 rule:
+  # Reported on the declared name so that only edits to the declaration line raise it.
   any:
-    - kind: namespace_declaration
-      has: { field: name, regex: '^PX\.' }
-    - kind: file_scoped_namespace_declaration
-      has: { field: name, regex: '^PX\.' }
+    - kind: identifier
+    - kind: qualified_name
+  inside:
+    field: name
+    any:
+      - kind: namespace_declaration
+        has: { field: name, regex: '^PX\.' }
+      - kind: file_scoped_namespace_declaration
+        has: { field: name, regex: '^PX\.' }

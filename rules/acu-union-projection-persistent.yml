@@ -1,0 +1,25 @@
+id: acu-union-projection-persistent
+language: csharp
+severity: error
+message: "Persistent [PXProjection] over a MappedSelect union. Union projections are read-only and the framework throws PXNotSupportedException; remove Persistent = true and the Type[] table list."
+metadata:
+  skill: acumatica-projection
+rule:
+  kind: attribute
+  has: { field: name, regex: '(^|\.)PXProjection(Attribute)?$' }
+  all:
+    - has:
+        kind: attribute_argument_list
+        has:
+          kind: attribute_argument
+          nthChild: 1
+          regex: '^typeof\s*\(\s*(PX\.Data\.)?MappedSelect<'
+    - has:
+        kind: attribute_argument_list
+        has:
+          kind: attribute_argument
+          any:
+            - regex: '^Persistent\s*=\s*true$'
+            - all:
+                - nthChild: 2
+                - not: { regex: '^\w+\s*=' }

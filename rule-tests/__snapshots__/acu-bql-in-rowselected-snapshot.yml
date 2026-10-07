@@ -7,6 +7,10 @@ snapshots:
       style: primary
       start: 105
       end: 141
+    - source: SOOrder_RowSelected
+      style: secondary
+      start: 33
+      end: 52
     - source: (PXCache sender, PXRowSelectedEventArgs e)
       style: secondary
       start: 52
@@ -22,11 +26,42 @@ snapshots:
       style: primary
       start: 76
       end: 179
-    - source: (Events.RowSelected<SOOrder> e)
+    - source: Events.RowSelected<SOOrder>
       style: secondary
-      start: 34
-      end: 65
+      start: 35
+      end: 62
+    - source: Events.RowSelected<SOOrder> e
+      style: secondary
+      start: 35
+      end: 64
+    - source: Events.RowSelected<SOOrder> e
+      style: secondary
+      start: 35
+      end: 64
     - source: protected virtual void _(Events.RowSelected<SOOrder> e) { var l = PXSelect<SOLine, Where<SOLine.orderNbr, Equal<Required<SOLine.orderNbr>>>>.Select(Base, e.Row.OrderNbr); }
       style: secondary
       start: 10
       end: 182
+  ? |
+    class E { protected virtual void _(Events.RowSelected<SOOrder> e) { var n = PXSelect<SOLine, Where<SOLine.orderNbr, Equal<Current<SOOrder.orderNbr>>>>.Select(Base).Select(r => (SOLine)r).ToList(); } }
+  : labels:
+    - source: PXSelect<SOLine, Where<SOLine.orderNbr, Equal<Current<SOOrder.orderNbr>>>>.Select(Base).Select(r => (SOLine)r).ToList()
+      style: primary
+      start: 76
+      end: 195
+    - source: Events.RowSelected<SOOrder>
+      style: secondary
+      start: 35
+      end: 62
+    - source: Events.RowSelected<SOOrder> e
+      style: secondary
+      start: 35
+      end: 64
+    - source: Events.RowSelected<SOOrder> e
+      style: secondary
+      start: 35
+      end: 64
+    - source: protected virtual void _(Events.RowSelected<SOOrder> e) { var n = PXSelect<SOLine, Where<SOLine.orderNbr, Equal<Current<SOOrder.orderNbr>>>>.Select(Base).Select(r => (SOLine)r).ToList(); }
+      style: secondary
+      start: 10
+      end: 198

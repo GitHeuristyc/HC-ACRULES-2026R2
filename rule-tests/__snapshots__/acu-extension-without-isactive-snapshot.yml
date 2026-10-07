@@ -3,44 +3,60 @@ snapshots:
   ? |
     public class HCExt : PXGraphExtension<SOOrderEntry> { class Nested { public static bool IsActive() => true; } }
   : labels:
-    - source: 'public class HCExt : PXGraphExtension<SOOrderEntry> { class Nested { public static bool IsActive() => true; } }'
+    - source: HCExt
       style: primary
-      start: 0
-      end: 111
+      start: 13
+      end: 18
     - source: ': PXGraphExtension<SOOrderEntry>'
       style: secondary
       start: 19
       end: 51
+    - source: 'public class HCExt : PXGraphExtension<SOOrderEntry> { class Nested { public static bool IsActive() => true; } }'
+      style: secondary
+      start: 0
+      end: 111
   ? |
     public class HCExt : PXGraphExtension<SOOrderEntry> { private void IsActive() { } }
   : labels:
-    - source: 'public class HCExt : PXGraphExtension<SOOrderEntry> { private void IsActive() { } }'
+    - source: HCExt
       style: primary
-      start: 0
-      end: 83
+      start: 13
+      end: 18
     - source: ': PXGraphExtension<SOOrderEntry>'
       style: secondary
       start: 19
       end: 51
+    - source: 'public class HCExt : PXGraphExtension<SOOrderEntry> { private void IsActive() { } }'
+      style: secondary
+      start: 0
+      end: 83
   ? |
     public class HCExt : PXGraphExtension<SOOrderEntry> { public void M() { } }
   : labels:
-    - source: 'public class HCExt : PXGraphExtension<SOOrderEntry> { public void M() { } }'
+    - source: HCExt
       style: primary
-      start: 0
-      end: 75
+      start: 13
+      end: 18
     - source: ': PXGraphExtension<SOOrderEntry>'
       style: secondary
       start: 19
       end: 51
+    - source: 'public class HCExt : PXGraphExtension<SOOrderEntry> { public void M() { } }'
+      style: secondary
+      start: 0
+      end: 75
   ? |
     public sealed class HCSOOrderExt : PXCacheExtension<SOOrder> { public virtual string UsrNote { get; set; } }
   : labels:
-    - source: 'public sealed class HCSOOrderExt : PXCacheExtension<SOOrder> { public virtual string UsrNote { get; set; } }'
+    - source: HCSOOrderExt
       style: primary
-      start: 0
-      end: 108
+      start: 20
+      end: 32
     - source: ': PXCacheExtension<SOOrder>'
       style: secondary
       start: 33
       end: 60
+    - source: 'public sealed class HCSOOrderExt : PXCacheExtension<SOOrder> { public virtual string UsrNote { get; set; } }'
+      style: secondary
+      start: 0
+      end: 108

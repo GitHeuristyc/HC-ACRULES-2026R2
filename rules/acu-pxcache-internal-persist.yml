@@ -1,0 +1,17 @@
+id: acu-pxcache-internal-persist
+language: csharp
+severity: warning
+message: "Low-level PXCache persistence call (PX1076 in 2026 R2). PXCache.Persist(operation), PersistInserted, PersistUpdated and PersistDeleted are internal API; save through Actions.PressSave() or graph.Persist()."
+metadata:
+  skill: acumatica-cache-tricks
+rule:
+  kind: invocation_expression
+  any:
+    - has: { field: function, regex: '\.(PersistInserted|PersistUpdated|PersistDeleted)$' }
+    - all:
+        - has: { field: function, regex: '\.Persist$' }
+        - has:
+            field: arguments
+            all:
+              - has: { kind: argument, nthChild: { position: 1, reverse: true }, regex: '^(PX\.Data\.)?PXDBOperation\.\w+$' }
+              - not: { has: { kind: argument, nthChild: 1, has: { kind: typeof_expression } } }

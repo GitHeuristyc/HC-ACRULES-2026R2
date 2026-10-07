@@ -1,7 +1,7 @@
 id: acu-pxdbstring-without-length
 language: csharp
 severity: warning
-message: "[PXDBString] without a length. Pass the column length as the first argument, for example [PXDBString(15, IsUnicode = true)]."
+message: "[PXDBString] without a length. The UI then accepts text of any size, and a value longer than the database column fails on save with a SQL truncation error. Pass the column length as the first argument, for example [PXDBString(15, IsUnicode = true)]; only nvarchar(max) columns may omit it."
 metadata:
   skill: acumatica-dac
 rule:
