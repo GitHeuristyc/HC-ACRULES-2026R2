@@ -1,0 +1,46 @@
+id: acu-extension-without-isactive
+snapshots:
+  ? |
+    public class HCExt : PXGraphExtension<SOOrderEntry> { class Nested { public static bool IsActive() => true; } }
+  : labels:
+    - source: 'public class HCExt : PXGraphExtension<SOOrderEntry> { class Nested { public static bool IsActive() => true; } }'
+      style: primary
+      start: 0
+      end: 111
+    - source: ': PXGraphExtension<SOOrderEntry>'
+      style: secondary
+      start: 19
+      end: 51
+  ? |
+    public class HCExt : PXGraphExtension<SOOrderEntry> { private void IsActive() { } }
+  : labels:
+    - source: 'public class HCExt : PXGraphExtension<SOOrderEntry> { private void IsActive() { } }'
+      style: primary
+      start: 0
+      end: 83
+    - source: ': PXGraphExtension<SOOrderEntry>'
+      style: secondary
+      start: 19
+      end: 51
+  ? |
+    public class HCExt : PXGraphExtension<SOOrderEntry> { public void M() { } }
+  : labels:
+    - source: 'public class HCExt : PXGraphExtension<SOOrderEntry> { public void M() { } }'
+      style: primary
+      start: 0
+      end: 75
+    - source: ': PXGraphExtension<SOOrderEntry>'
+      style: secondary
+      start: 19
+      end: 51
+  ? |
+    public sealed class HCSOOrderExt : PXCacheExtension<SOOrder> { public virtual string UsrNote { get; set; } }
+  : labels:
+    - source: 'public sealed class HCSOOrderExt : PXCacheExtension<SOOrder> { public virtual string UsrNote { get; set; } }'
+      style: primary
+      start: 0
+      end: 108
+    - source: ': PXCacheExtension<SOOrder>'
+      style: secondary
+      start: 33
+      end: 60
