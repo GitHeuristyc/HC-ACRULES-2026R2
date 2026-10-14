@@ -56,3 +56,59 @@ snapshots:
       style: secondary
       start: 0
       end: 274
+  ? |
+    public class HCUpsWebhookHandler : IWebhookHandler
+    {
+        public async Task HandleAsync(WebhookContext context, CancellationToken cancellation)
+        {
+            string forwarded = HttpContext.Current?.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+        }
+    }
+  : labels:
+    - source: HttpContext.Current
+      style: primary
+      start: 176
+      end: 195
+    - source: ': IWebhookHandler'
+      style: secondary
+      start: 33
+      end: 50
+    - source: |-
+        public class HCUpsWebhookHandler : IWebhookHandler
+        {
+            public async Task HandleAsync(WebhookContext context, CancellationToken cancellation)
+            {
+                string forwarded = HttpContext.Current?.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+            }
+        }
+      style: secondary
+      start: 0
+      end: 253
+  ? |
+    public class HCUspsWebhookHandler : IWebhookHandler
+    {
+        public async Task HandleAsync(WebhookContext context, CancellationToken cancellation)
+        {
+            string peer = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+        }
+    }
+  : labels:
+    - source: HttpContext.Current
+      style: primary
+      start: 172
+      end: 191
+    - source: ': IWebhookHandler'
+      style: secondary
+      start: 34
+      end: 51
+    - source: |-
+        public class HCUspsWebhookHandler : IWebhookHandler
+        {
+            public async Task HandleAsync(WebhookContext context, CancellationToken cancellation)
+            {
+                string peer = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+            }
+        }
+      style: secondary
+      start: 0
+      end: 239

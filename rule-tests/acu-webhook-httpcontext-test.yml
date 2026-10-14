@@ -17,6 +17,15 @@ valid:
             string id = HttpContext.Current.Request.QueryString["id"];
         }
     }
+  - |
+    public class HCUpsWebhookHandler : IWebhookHandler
+    {
+        public async Task HandleAsync(WebhookContext context, CancellationToken cancellation)
+        {
+            var peer = HttpContext.Current?.Request.ServerVariables["REMOTE_ADDR"];
+            string qualified = System.Web.HttpContext.Current?.Request.ServerVariables["REMOTE_ADDR"];
+        }
+    }
 invalid:
   - |
     public class HCFedexWebhookHandler : IWebhookHandler
@@ -32,5 +41,21 @@ invalid:
         async Task IWebhookHandler.HandleAsync(WebhookContext context, CancellationToken cancellation)
         {
             HttpRequest aspNetRequest = System.Web.HttpContext.Current?.Request;
+        }
+    }
+  - |
+    public class HCUpsWebhookHandler : IWebhookHandler
+    {
+        public async Task HandleAsync(WebhookContext context, CancellationToken cancellation)
+        {
+            string forwarded = HttpContext.Current?.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+        }
+    }
+  - |
+    public class HCUspsWebhookHandler : IWebhookHandler
+    {
+        public async Task HandleAsync(WebhookContext context, CancellationToken cancellation)
+        {
+            string peer = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
         }
     }

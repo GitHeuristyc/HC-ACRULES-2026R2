@@ -1,7 +1,7 @@
 id: acu-webhook-httpcontext
 language: csharp
 severity: warning
-message: "HttpContext.Current used in a webhook handler. Read the request and write the response through WebhookContext.Request and WebhookContext.Response."
+message: "HttpContext.Current used in a webhook handler. Read the query, headers and body and write the response through WebhookContext.Request and WebhookContext.Response. WebhookContext exposes no client IP (2024R1 to 2026R2), so an IP allow-list may read HttpContext.Current?.Request.ServerVariables[\"REMOTE_ADDR\"] and must reject a null context or empty address. Read X-Forwarded-For only when REMOTE_ADDR is a configured trusted proxy and every trusted proxy in the chain appends the peer it received; then use the rightmost entry that is not a configured trusted proxy. Otherwise use only REMOTE_ADDR."
 metadata:
   skill: acumatica-webhooks
 rule:
@@ -11,3 +11,11 @@ rule:
     stopBy: end
     kind: class_declaration
     has: { kind: base_list, regex: '\bIWebhookHandler\b' }
+  # The TCP peer address for an IP allow-list: WebhookContext does not expose it.
+  not:
+    inside:
+      stopBy: end
+      any:
+        - kind: element_access_expression
+        - kind: conditional_access_expression
+      regex: '^(System\.Web\.)?HttpContext\.Current\?\.Request\.ServerVariables\[\s*"REMOTE_ADDR"\s*\]$'

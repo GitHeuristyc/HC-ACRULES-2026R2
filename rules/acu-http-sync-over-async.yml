@@ -1,7 +1,7 @@
 id: acu-http-sync-over-async
 language: csharp
 severity: warning
-message: "Blocking wait on an async HTTP call (.Result, .Wait() or GetAwaiter().GetResult()). Await the call and pass a CancellationToken; from synchronous graph code, run the request inside a long operation that awaits it."
+message: "Blocking wait on an async HTTP call (.Result, .Wait() or GetAwaiter().GetResult()). Await the call and pass a CancellationToken; from synchronous graph code, run the request inside a long operation that awaits it. On net48 HttpClient has no synchronous Send; code that must stay synchronous uses HttpWebRequest with one total deadline and cancellation bridged to Abort() (see acumatica-outbound-http)."
 ignores:
   - '**/tests/**'
   - '**/*Tests/**'
